@@ -10,7 +10,11 @@ phases:
   build:
     commands:
       # - python -m unittest discover -s mysite
+  post-build:
+  commands:
+  - echo "post deploy"      
+  - mv target/deploy ./
 artifacts:
   files:
-    - '**/*'
-  base-directory: mysite
+    - deploy/**/*
+  # base-directory: mysite
