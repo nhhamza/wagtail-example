@@ -1,9 +1,9 @@
 version: 0.2
 
-#env:
-  #variables:
-     # key: "value"
-     # key: "value"
+env:
+  variables:
+    LAMBDA_NAME: "python-lambda"
+    BUCKET_NAME: "mysitepython3test"
   #parameter-store:
      # key: "value"
      # key: "value"
@@ -12,18 +12,26 @@ phases:
   install:
     runtime-versions:
       python: 3.7
-    #commands:
-      # - command
-      # - command
-  #pre_build:
-    #commands:
-      # - command
-      # - command
+    commands:
+      - apt-get update
+      - apt-get install zip
+  pre_build:
+    commands:
+      - pip install virtualenv
+      - virtualenv env
+      - . env/bin/activate
+      - pip install -r requirements.txt
   build:
     commands:
-      - echo Hello from CodeBuild
-      # - command
-      # - command
+      - ISO_DATE=$(date +%Y-%m-%dT%H:%M:%S%z)
+      - TMP_DIR="dist-$ISO_DATE"
+      - mkdir $TMP_DIR
+      - cp *.py $TMP_DIR
+      - cp -rf env/lib/python2.7/site-packages/* $TMP_DIR
+      - cd $TMP_DIR; zip -r ../dist.zip *
+      - cd ..
+      - aws s3 cp dist.zip s3://$BUCKET_NAME/$LAMBDA_NAME/dist.zip
+      - aws lambda update-function-code --function-name $LAMBDA_NAME --s3-bucket $BUCKET_NAME --s3-key $LAMBDA_NAME/dist.zip --publish
   #post_build:
     #commands:
       # - command
