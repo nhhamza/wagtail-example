@@ -11,9 +11,9 @@ phases:
     commands:
       # - python -m unittest discover -s mysite
   post-build:
-  commands:
-  - echo "post deploy"      
-  - mv target/deploy ./
+    commands:
+      - echo "post deploy"      
+      - mv target/deploy ./
 artifacts:
   files:
     - deploy/**/*
