@@ -28,9 +28,17 @@ phases:
       - echo "SAM packaging completed on `date`"
 
 artifacts:
+  type: zip
   files:
-    - packaged.yaml
-  discard-paths: yes
+    - 'template.yml'
+    - 'ec2django/**/*'
+    - 'helloworld/**/*'
+    - 'scripts/**/*'
+    - 'appspec.yml'
+    - 'manage.py'
+    - 'requirements/**/*'
+    - 'requirements.txt'
+    - 'supervisord.conf'
 
 cache:
   paths:
