@@ -17,7 +17,7 @@ phases:
       - apt-get install zip
   pre_build:
     commands:
-      - cd wagtail-example
+      - cd my-site
       - pip install virtualenv
       - virtualenv env
       - . env/bin/activate
