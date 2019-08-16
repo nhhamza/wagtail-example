@@ -13,8 +13,16 @@ phases:
   post_build:
     commands:
       - echo "post deploy"      
-      - mv target/deploy ./
+      # - mv target/deploy ./
 artifacts:
+  type: zip
   files:
-    - deploy/**/*
-  # base-directory: mysite
+    - 'template.yml'
+    - 'ec2django/**/*'
+    - 'mysite/**/*'
+    - 'scripts/**/*'
+    - 'appspec.yml'
+    - 'manage.py'
+    - 'requirements/**/*'
+    - 'requirements.txt'
+    - 'supervisord.conf'
