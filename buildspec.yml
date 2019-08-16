@@ -10,7 +10,7 @@ phases:
   build:
     commands:
       # - python -m unittest discover -s mysite
-  post-build:
+  post_build:
     commands:
       - echo "post deploy"      
       - mv target/deploy ./
