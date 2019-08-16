@@ -1,8 +1,11 @@
 version: 0.2
-
+      
 phases:
   install:
     commands:
+    - echo "[+] Scanning for security vulnerability within dependencies"
+    runtime-versions:
+      java: openjdk11
       # Install dependencies needed for running tests
       - pip install -r requirements/common.txt
 
