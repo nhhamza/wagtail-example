@@ -17,7 +17,7 @@ phases:
       - apt-get install zip
   pre_build:
     commands:
-      - cd my-site
+      - cd mysite
       - pip install virtualenv
       - virtualenv env
       - . env/bin/activate
