@@ -1,0 +1,2 @@
+# wagtail-example
+wagtail-example
