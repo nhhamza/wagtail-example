@@ -31,16 +31,16 @@ phases:
       - cp -rf env/lib/python3.7/site-packages/* $TMP_DIR
       - cd $TMP_DIR; zip -r ../dist.zip *
       - cd ..
-      - aws s3 cp dist.zip s3://mysitepython3test/python-lambda/dist.zip
-      - aws lambda update-function-code --function-name python-lambda --s3-bucket mysitepython3test --s3-key python-lambda/dist.zip --publish
+      - aws s3 cp dist.zip s3://$BUCKET_NAME/$LAMBDA_NAME/dist.zip
+      - aws lambda update-function-code --function-name $LAMBDA_NAME --s3-bucket $BUCKET_NAME --s3-key $LAMBDA_NAME/dist.zip --publish
   #post_build:
     #commands:
       # - command
       # - command
-#artifacts:
-  #files:
-    # - location
-    # - location
+artifacts:
+  type: zip
+  files:
+    - '**/*'
   #discard-paths: yes
   #base-directory: location
 #cache:
