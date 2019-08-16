@@ -1,20 +1,37 @@
 version: 0.2
 
+#env:
+  #variables:
+     # key: "value"
+     # key: "value"
+  #parameter-store:
+     # key: "value"
+     # key: "value"
+
 phases:
-  install:
-    runtime-versions:
-        python: 3.7
-  pre_build:
-    commands:
-      - pip install -r mysite/requirements.txt
+  #install:
+    #commands:
+      # - command
+      # - command
+  #pre_build:
+    #commands:
+      # - command
+      # - command
   build:
     commands:
-      # - python -m unittest discover -s mysite
-  post_build:
-    commands:
-      - echo "post deploy"      
-      # - mv target/deploy ./
-artifacts:
-  type: zip
-  files:
-    - '**/*'
+      - echo Hello from CodeBuild
+      # - command
+      # - command
+  #post_build:
+    #commands:
+      # - command
+      # - command
+#artifacts:
+  #files:
+    # - location
+    # - location
+  #discard-paths: yes
+  #base-directory: location
+#cache:
+  #paths:
+    # - paths
