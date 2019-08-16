@@ -1,31 +1,15 @@
-# Buildspec Reference Doc: https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html
-
 version: 0.2
 
 phases:
   install:
     commands:
-      - echo "[+] Scanning for security vulnerability within dependencies"
-    runtime-versions:
-      java: openjdk11
-      # - pipenv check (if pipenv is installed and a Pipfile is in place)
-      # - Alternatively: https://www.owasp.org/index.php/OWASP_Dependency_Check
+      # Install dependencies needed for running tests
+      - pip install -r requirements/common.txt
+
   pre_build:
     commands:
-      - pip install pytest requests
-      - echo "[+] Running tests..."
-      # - python -m pytest tests/ -v
-  build:
-    commands:
-      - echo "[+] Installing dependencies...."
-      - cd mysite
-      - pip install -r requirements.txt -t mysite/build/
-      - cp mysite/*.py mysite/build/
-      - echo "Starting SAM packaging `date` in `pwd`"
-      # - aws cloudformation package --template-file template.yaml --s3-bucket $BUILD_OUTPUT_BUCKET --output-template-file packaged.yaml
-  post_build:
-    commands:
-      - echo "SAM packaging completed on `date`"
+      # Discover and run unit tests. For more information, see <https://docs.djangoproject.com/en/2.0/topics/testing/overview/>
+      - python manage.py test
 
 artifacts:
   type: zip
@@ -39,7 +23,3 @@ artifacts:
     - 'requirements/**/*'
     - 'requirements.txt'
     - 'supervisord.conf'
-
-cache:
-  paths:
-    - '/root/.cache/pip'
