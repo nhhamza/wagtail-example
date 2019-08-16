@@ -33,9 +33,9 @@ phases:
       - cd ..
       - aws s3 cp dist.zip s3://$BUCKET_NAME/$LAMBDA_NAME/dist.zip
       - aws lambda update-function-code --function-name $LAMBDA_NAME --s3-bucket $BUCKET_NAME --s3-key $LAMBDA_NAME/dist.zip --publish
-  #post_build:
-    #commands:
-      # - command
+  post_build:
+    commands:
+      - python3 manage.py runserver
       # - command
 artifacts:
   type: zip
